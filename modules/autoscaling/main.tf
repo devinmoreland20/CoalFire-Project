@@ -37,7 +37,7 @@ resource "aws_launch_configuration" "anonymous_web_server" {
   instance_type   = var.instance_type
   key_name        = var.key_name
   security_groups = [var.launch_config_sg]
-
+  #user_data       = var.user_data
   lifecycle {
     create_before_destroy = true
   }
@@ -48,7 +48,8 @@ resource "aws_launch_configuration" "anonymous_web_server" {
     volume_type           = var.root_block_device_volume_type
     volume_size           = var.root_block_device_volume_size
   }
-  user_data = var.user_data
+
+
 }
 # user_data = <<-EOF
 #   #!/bin/bash

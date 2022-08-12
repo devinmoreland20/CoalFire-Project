@@ -12,3 +12,5 @@ variable "vpc_ip" {
 variable "access_ip" {
   # this var is in terraform.tfvars and is my local machines IP for ssh into bastion
 }
+
+
