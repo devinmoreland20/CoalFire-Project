@@ -9,8 +9,5 @@ variable "public_access" {
 variable "vpc_ip" {
   default = "10.1.0.0/16"
 }
-variable "access_ip" {
-  # this var is in terraform.tfvars and is my local machines IP for ssh into bastion
-}
-
+variable "access_ip" {}
 

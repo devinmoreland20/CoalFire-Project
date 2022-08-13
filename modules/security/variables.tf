@@ -1,6 +1,4 @@
-variable "access_ip" {
+#--- modules/security/variables.tf
 
-}
-variable "vpc_id" {
-
-}
+variable "access_ip" {}
+variable "vpc_id" {}

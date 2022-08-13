@@ -1,6 +1,5 @@
 # ----modules/computer/main.tf
 
-
 resource "aws_instance" "public_redhat" {
   count                       = var.redhat_box_count
   ami                         = var.ami

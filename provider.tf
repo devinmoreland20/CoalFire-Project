@@ -19,3 +19,11 @@ provider "aws" {
 }
 
 provider "random" {}
+
+# terraform {
+#   backend "s3" {
+#     bucket = "coalfire-081222"
+#     key    = "state/"
+#     region = "us-east-2"
+#   }
+# }

@@ -1,3 +1,5 @@
+#----modules/WAF/main.tf
+
 resource "aws_wafv2_web_acl" "anonymous" {
   name        = var.name
   description = var.description

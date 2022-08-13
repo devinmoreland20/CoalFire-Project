@@ -13,9 +13,7 @@ resource "random_string" "random" {
 data "aws_key_pair" "Ohio" {
   key_name           = "Ohio"
   include_public_key = true
-
 }
-
 
 module "s3" {
   source      = "./modules/s3"
@@ -69,7 +67,6 @@ module "loadbalancer" {
   lb_unhealthy_threshold = 3
   lb_timeout             = 20
   lb_interval            = 30
-
 }
 
 module "autoscaling" {
@@ -95,7 +92,6 @@ module "autoscaling" {
   root_block_device_del_term    = true
   root_block_device_volume_type = "gp2"
   root_block_device_volume_size = 20
-
 }
 
 module "security" {
@@ -116,6 +112,5 @@ module "WAF" {
   cloudwatch_metrics_enabled = true
   vis_config_metric_name     = "friendly-rule-metric-name"
   sampled_requests_enabled   = true
-
 }
 

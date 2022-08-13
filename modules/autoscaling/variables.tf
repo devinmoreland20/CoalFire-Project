@@ -1,4 +1,5 @@
 # ---- modules/autoscaling/variables
+
 variable "ami" {}
 variable "instance_type" {}
 variable "private_sn" {}
@@ -14,7 +15,6 @@ variable "health_check_grace_period" {}
 variable "health_check_type" {}
 variable "policy_type" {}
 variable "predefined_metric_type" {}
-#variable "user_data" {}
 variable "adjustment_type" {}
 variable "target_value" {}
 variable "root_block_device_encrypted" {}

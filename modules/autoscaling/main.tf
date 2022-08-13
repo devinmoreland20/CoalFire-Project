@@ -1,4 +1,3 @@
-
 # ---- modules/autoscaling/main
 
 resource "aws_autoscaling_group" "webserver_asg" {
@@ -23,13 +22,9 @@ resource "aws_autoscaling_policy" "anonymous" {
     predefined_metric_specification {
       predefined_metric_type = var.predefined_metric_type
     }
-
     target_value = var.target_value
   }
 }
-
-
-
 
 resource "aws_launch_configuration" "anonymous_web_server" {
   #cant use here when using a ASG it wont let you update the config without destroy first. https://github.com/hashicorp/terraform/issues/3665
@@ -37,7 +32,14 @@ resource "aws_launch_configuration" "anonymous_web_server" {
   instance_type   = var.instance_type
   key_name        = var.key_name
   security_groups = [var.launch_config_sg]
-  #user_data       = var.user_data
+  user_data       = <<-EOF
+    #!/bin/bash
+    sudo yum update -y
+    sudo yum install -y httpd.x86_64
+    sudo systemctl start httpd.service
+    sudo systemctl enable httpd.service
+    echo "<h1>Hello World from $(hostname -f)</h1>" > /var/www/html/index.html
+  EOF
   lifecycle {
     create_before_destroy = true
   }
@@ -48,14 +50,4 @@ resource "aws_launch_configuration" "anonymous_web_server" {
     volume_type           = var.root_block_device_volume_type
     volume_size           = var.root_block_device_volume_size
   }
-
-
 }
-# user_data = <<-EOF
-#   #!/bin/bash
-#   yum update -y
-#   yum install httpd -y
-#   systemctl enable httpd
-#   systemctl start httpd
-#   echo "<h1>TEST WEB PAGE</h1>" > /var/www/html/index.html
-#   EOF

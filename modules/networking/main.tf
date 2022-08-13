@@ -16,14 +16,6 @@ resource "aws_internet_gateway" "gw" {
   }
 }
 
-data "aws_availability_zones" "available" {
-}
-
-resource "random_shuffle" "az_list" {
-  input        = data.aws_availability_zones.available.names
-  result_count = var.random_az_count
-}
-
 resource "aws_nat_gateway" "anonymous" {
   allocation_id = aws_eip.anonymous.id
   subnet_id     = aws_subnet.public_subnet[0].id
@@ -37,6 +29,13 @@ resource "aws_eip" "anonymous" {
   vpc = true
 }
 
+data "aws_availability_zones" "available" {
+}
+
+resource "random_shuffle" "az_list" {
+  input        = data.aws_availability_zones.available.names
+  result_count = var.random_az_count #this will only choose two AZ, We could make a list of AZ if we preferred. 
+}
 
 resource "aws_subnet" "public_subnet" {
   count             = var.public_sn_count
